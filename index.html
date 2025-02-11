@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Countdown</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet"> <!-- Link to Great Vibes font -->
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Background image */
+    .birthdayimg {
+      background-image: url('https://cdn.pixabay.com/photo/2018/02/23/21/29/roses-frame-3176667_960_720.jpg');
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      text-align: center;
+      color: white;
+    }
+
+    /* Header styling */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #ffcc00;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 10px 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 5px;
+      z-index: 1000;
+      margin-top: 10px;
+      width: 90%; /* Make the header more mobile-friendly */
+      text-align: center;
+    }
+
+    /* Footer styling */
+    .footer {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #000000; /* Black color for footer text */
+      font-size: 14px;
+      text-align: center;
+      z-index: 1000;
+      width: 90%;
+    }
+
+    /* Middle section */
+    .middle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #ffeb3b;
+      font-weight: bold;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    }
+
+    p {
+      font-size: 60px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    hr {
+      width: 50%;
+      margin: 20px auto;
+      border: 1px solid #ffeb3b;
+    }
+
+    .message {
+      animation: fadeIn 1s ease-out;
+    }
+
+    /* Keyframe animation for smooth fade-in */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Styling for the countdown text */
+    #amx {
+      color: #ff0000;
+    }
+
+    /* Styling for the "Happy Birthday Muqddas Naz" message with Great Vibes font */
+    .happy-birthday {
+      font-family: 'Great Vibes', cursive;
+      font-size: 65px; /* Reduced font size here */
+      color: #ff0000;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Styling for the copyright message */
+    .copyright {
+      font-size: 12px;
+      color: #000000; /* Black color for copyright text */
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    /* Media queries for responsiveness */
+    @media only screen and (max-width: 768px) {
+      .header {
+        font-size: 24px;
+      }
+
+      .middle h1 {
+        font-size: 40px;
+      }
+
+      .middle p {
+        font-size: 50px;
+      }
+
+      .footer {
+        font-size: 12px;
+      }
+
+      .happy-birthday {
+        font-size: 50px; /* Smaller font size for mobile */
+      }
+
+      hr {
+        width: 70%;
+      }
+    }
+
+    @media only screen and (max-width: 480px) {
+      .header {
+        font-size: 18px;
+      }
+
+      .middle h1 {
+        font-size: 30px;
+      }
+
+      .middle p {
+        font-size: 40px;
+      }
+
+      .footer {
+        font-size: 10px;
+      }
+
+      .happy-birthday {
+        font-size: 40px; /* Even smaller font size for mobile */
+      }
+
+      hr {
+        width: 80%;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<!-- Background image section -->
+<div class="birthdayimg">
+
+  <!-- Header with "Ready for the Surprise?" -->
+  <div class="header">
+    <p>Ready for the Surprise?</p>
+  </div>
+
+  <!-- Middle section with countdown and birthday message -->
+  <div class="middle">
+    <h1>Wait a moment</h1>
+    <hr>
+    <p id="amx" class="message">Loading...</p>
+  </div>
+
+  <!-- Footer with copyright and created text -->
+  <div class="footer">
+    <div class="copyright">
+      &copy; 2025 MS Prime Tech Services. All rights reserved.
+    </div>
+  </div>
+
+</div>
+
+<script>
+  var countDownDate = new Date("Feb 10, 2025 00:00:00").getTime();
+
+  var countdownfunction = setInterval(function() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the countdown
+    document.getElementById("amx").innerHTML = days + "D " + hours + "H " + minutes + "M " + seconds + "S ";
+
+    if (distance < 0) {
+      clearInterval(countdownfunction);
+
+      // Hide the "Wait a moment" text
+      document.querySelector('h1').style.display = 'none';
+      document.getElementById("amx").style.display = 'none';
+
+      // Show the "Happy Birthday" message
+      var happyBirthdayMessage = document.createElement('p');
+      happyBirthdayMessage.classList.add('happy-birthday');
+      happyBirthdayMessage.innerHTML = "Muhammad Saad is Wishing You HAPPY BIRTHDAY Muqddas Naz";
+      document.querySelector('.middle').appendChild(happyBirthdayMessage);
+
+      // Adding a delay before the redirect
+      setTimeout(function() {
+        window.location = "https://www.youtube.com/";
+      }, 3000); // Redirect after 3 seconds
+    }
+
+  }, 1000);
+</script>
+
+</body>
+</html>
